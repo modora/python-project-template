@@ -1,0 +1,48 @@
+[tool.poetry]
+authors = ["Stanley Wu <stanleywu@scrappylabs.dev>"]
+description = ""
+license = "MIT"
+name = "python-project-template"
+version = "1.0"
+
+packages = [{include = "src"}]
+
+[tool.poetry.dependencies]
+python = ">=3.10,<3.11"
+
+[tool.poetry.dev-dependencies]
+Sphinx = "^4.5.0"
+black = "^22.3.0"
+coverage = "^6.3.2"
+poethepoet = "^0.13.1"
+pytest = "^7.1.1"
+pytest-cov = "^3.0.0"
+sphinx-rtd-theme = "^1.0.0"
+sphinxcontrib-napoleon = "^0.7"
+pyinstaller = "^5.0"
+
+[tool.poe.tasks]
+help = "Run tests"
+test = "pytest test/"
+
+[tool.poe.tasks.coverage]
+cmd = "pytest --cov=src test/"
+help = "Run the coverage test on the source code"
+
+[tool.poe.tasks.cov_report]
+cmd = "python -m coverage report"
+deps = ["coverage"]
+help = "Generate coverage report"
+
+[tool.poe.tasks.cov_html]
+cmd = "python -m coverage html"
+deps = ["coverage"]
+help = "Generate coverage html"
+
+[tool.poe.tasks.docs]
+cmd = "make -C docs html"
+help = "Build the documentation"
+
+[build-system]
+build-backend = "poetry.core.masonry.api"
+requires = ["poetry-core>=1.0.0"]
